@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kumorichizu cart</title>
+     <!-- Link to your custom CSS file -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="styles.css">
+     
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <div class="logo">
+                <img src="logo.png" alt="logo" class="img-fluid" style="max-width: 150px;">
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="the creator.html">The Creator</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Stickers</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="custom.html">Custom Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="testimonials.html">Reviews</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <section id="cart">
+        <div class="container">
+            <h2 class="text-center">Shopping Cart</h2>
+            
+            <!-- Form for adding products -->
+            <form id="cartForm">
+                <div class="form-group">
+                    <label for="product">Select a product:</label>
+                    <select name="product" id="product" class="form-control" required>
+                        <option value="">-- Choose a Product --</option>
+                        <option value="Purrfect Catto Collection">Purrfect Catto Collection</option>
+                        <option value="Gojo Catto">Gojo Catto</option>
+                        <option value="Geto Catto">Geto Catto</option>
+                        <option value="Deadly Pair Collection">Deadly Pair Collection</option>
+                        <option value="Deadly Pair - Gojo">Deadly Pair - Gojo</option>
+                        <option value="Deadly Pair - Geto">Deadly Pair - Geto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" min="1" max="10" required>
+                </div>
+                <button type="submit" class="btn btn-custom-add mt-3">Add to Cart</button>
+            </form>
+            
+            <!-- Selected Items Table -->
+            <h3 class="mt-4">Selected Items</h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cartItemsBody">
+                    <!-- Dynamically added rows will appear here -->
+                </tbody>
+            </table>
+    
+            <!-- Display Cart Total -->
+            <div id="cartTotal" class="text-right mt-3">
+                <h4>Total: ₱<span id="totalAmount">0</span></h4>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <!-- Left Section -->
+            <div class="footer-left">
+                <img src="logo.png" alt="Black Cat Logo" class="footer-logo" usemap="#logoMap">
+                <map name="logoMap">
+                    <area shape="rect" coords="0,0,100,100" href="index.html" alt="Home">
+                    <area shape="rect" coords="110,0,200,100" href="about.html" alt="About Us">
+                </map>
+                <p>Bringing anime magic to your everyday life, one sticker at a time!</p>
+            </div>
+    
+            <!-- Middle Sections -->
+            <div class="footer-section">
+                <h3>Reach us here!</h3>
+                <ul>
+                    <li>kumorichizu@gmail.com</li>
+                </ul>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Developers</h3>
+                <ul>
+                    <li>Frances Zian Acosta</li>
+                    <li>Elisah Bienne Candelaria</li>
+                    <li>Michael Joseph Amorosa</li>
+                    <li>Chester Sabio</li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>Copyright © 2025 kumorichizu</p>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Add your JavaScript here for functionality -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const cartForm = document.getElementById("cartForm");
+    const cartItemsBody = document.getElementById("cartItemsBody");
+    const totalAmount = document.getElementById("totalAmount");
+
+    // Sample product prices (adjust as needed)
+    const productPrices = {
+        "Purrfect Catto Collection": 100,
+        "Gojo Catto": 50,
+        "Geto Catto": 40,
+        "Deadly Pair Collection": 45,
+        "Deadly Pair - Gojo": 25,
+        "Deadly Pair - Geto": 25,
+    };
+
+    let cart = []; // Store cart items
+
+    // Handle form submission (add to cart)
+    cartForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        
+        const product = document.getElementById("product").value;
+        const quantity = parseInt(document.getElementById("quantity").value, 10);
+        
+        if (!product || quantity <= 0) return;
+
+        // Check if item is already in cart
+        let existingItem = cart.find(item => item.name === product);
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({ name: product, quantity, price: productPrices[product] });
+        }
+
+        updateCart();
+    });
+
+    // Function to update cart display
+    function updateCart() {
+        cartItemsBody.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            let itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+                <td>₱${item.price.toFixed(2)}</td>
+                <td>₱${itemTotal.toFixed(2)}</td>
+                <td><button class="btn btn-danger btn-sm remove-item" data-index="${index}">Remove</button></td>
+            `;
+            cartItemsBody.appendChild(row);
+        });
+
+        totalAmount.textContent = total.toFixed(2);
+
+        // Add event listener to remove buttons
+        document.querySelectorAll(".remove-item").forEach(button => {
+            button.addEventListener("click", function () {
+                const index = this.getAttribute("data-index");
+                cart.splice(index, 1);
+                updateCart();
+            });
+        });
+    }
+});
+
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
